@@ -1,0 +1,11 @@
+.git
+.github
+node_modules
+test
+docs
+*.md
+Dockerfile
+docker-compose.yml
+fly.toml
+render.yaml
+.gitignore

@@ -1,0 +1,17 @@
+# docker compose up -d   →   http://localhost:8080
+services:
+  psle-otter:
+    build: .
+    image: psle-otter:latest
+    container_name: psle-otter
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+      # BASIC_AUTH: "family:choose-a-password"     # optional password gate for public hosting
+      # EXTRA_CONNECT_SRC: "http://192.168.1.50:11434"   # optional: allow a home AI server (Ollama) on your LAN
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 128m

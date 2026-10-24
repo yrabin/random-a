@@ -1,0 +1,12 @@
+# Render Blueprint: New + → Blueprint → pick this repo. Free plan sleeps after ~15 min idle (first load is slow).
+services:
+  - type: web
+    name: psle-otter
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "10000"
