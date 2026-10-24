@@ -1,0 +1,13 @@
+{
+  "name": "psle-otter",
+  "version": "1.0.0",
+  "description": "Ollie the Otter - a PSLE study buddy for Singapore upper-primary students (P4-P6). Zero dependencies, runs in Docker, optional bring-your-own-key AI.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test \"test/*.test.js\""
+  }
+}
