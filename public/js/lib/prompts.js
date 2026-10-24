@@ -53,3 +53,6 @@ export const PARENT_SUMMARY = `You write a brief, practical weekly update for th
 
 export const MARK_OPEN = `${BASE}
 You mark a student's answer to a PSLE-style open-ended question against a model answer and keywords. Be fair: accept answers that mean the same thing in different words. Reply with ONLY valid JSON: {"verdict":"correct|partly|incorrect","feedback":"1-3 short kid-friendly sentences","missing_keywords":[""]}`;
+
+export const SITUATIONAL = `${BASE}
+You are a PSLE Paper 1 Situational Writing marker (15 marks: Task Fulfilment 7, Language 8). Check that the student answered all the points in the task, used the correct format and tone for the audience, and wrote accurate English. If no task was given, judge only language and format. Reply with ONLY valid JSON: {"task":{"score":0,"out_of":7,"comment":""},"language":{"score":0,"out_of":8,"comment":""},"missing_points":[""],"strengths":[""],"improvements":[""],"next_step":""}`;

@@ -25,3 +25,25 @@ test('other banks are well-formed', () => {
   ZH.forEach((z) => assert.equal(z.length, 4));
   ZHV.forEach((z) => assert.equal(z.length, 3));
 });
+
+import * as banks from '../public/js/lib/banks.js';
+import { makeRng } from '../public/js/lib/rng.js';
+import { mixedSet } from '../public/js/lib/mathgen.js';
+
+test('banks build valid questions', () => {
+  const r = makeRng(5);
+  const all = [
+    ...banks.vocabQuestions(r, 10), ...banks.vocabUseQuestions(r, 10), ...banks.grammarQuestions(r, 20), ...banks.singlishQuestions(r, 5),
+    ...banks.idiomQuestions(r, 8), ...banks.scienceQuestions(r, 20), ...banks.chineseIdiomQuestions(r, 8), ...banks.chineseVocabQuestions(r, 8),
+  ];
+  for (const q of all) {
+    assert.equal(q.options.length, 4, q.q);
+    assert.equal(new Set(q.options).size, 4, 'dup options: ' + q.q);
+    assert.ok(!q.q.includes('undefined'));
+  }
+  assert.ok(banks.vocabUseQuestions(r, 5).every((q) => q.q.includes('______')));
+  const d1 = banks.dailyChallenge('2026-01-01', 6, mixedSet);
+  const d2 = banks.dailyChallenge('2026-01-01', 6, mixedSet);
+  assert.equal(d1.length, 6);
+  assert.deepEqual(d1.map((q) => q.q), d2.map((q) => q.q));
+});

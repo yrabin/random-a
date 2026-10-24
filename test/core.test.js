@@ -80,3 +80,15 @@ test('daysUntil', () => {
   assert.equal(daysUntil('2025-10-10', new Date(2025, 9, 1)), 9);
   assert.equal(daysUntil('', new Date()), null);
 });
+
+import { summarize } from '../public/js/lib/report.js';
+test('report summary has no name and counts last 7 days', () => {
+  const st = createStore(memStorage());
+  st.profile.name = 'Secret Name';
+  for (let i = 0; i < 5; i++) st.record({ id: 'r' + i, subject: 'math', topic: 'ratio', topicName: 'Ratio' }, i % 2 === 0);
+  const s = summarize(st.profile);
+  assert.equal(s.last7Days.questionsAnswered, 5);
+  assert.equal(s.last7Days.accuracyPct, 60);
+  assert.ok(!JSON.stringify(s).includes('Secret'));
+  assert.equal(s.weakestTopics[0].topic, 'Ratio');
+});
