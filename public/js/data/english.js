@@ -219,3 +219,59 @@ export const READ_ALOUD = [
   'Although the path up the hill was steep and slippery, the hikers refused to give up. "We are almost there!" shouted Hafiz, pointing at the glittering view ahead. When they finally reached the top, the whole city sparkled below them.',
   'The librarian smiled warmly as Priya returned the heavy storybook. "Did you enjoy it?" she asked. "Very much," replied Priya, her eyes shining. "May I borrow another one about space adventures, please?"',
 ];
+
+// Paper 2 style "Grammar Cloze": each blank is a multiple-choice question. `a` = correct, `w` = wrong options.
+export const CLOZE = [
+  {
+    title: 'The Wet Market',
+    text: 'Every Saturday morning, Mei Ling (1) to the wet market with her grandmother. They always (2) early because the best vegetables are sold out (3) nine o’clock. Yesterday, her grandmother bought (4) kilogram of fresh prawns. Mei Ling helped to carry the bags, (5) were quite heavy. When they reached home, they (6) lunch together.',
+    blanks: [
+      { a: 'goes', w: ['go', 'going', 'gone'], e: 'A habit ("Every Saturday") with a singular subject uses the simple present: "goes".' },
+      { a: 'arrive', w: ['arrives', 'arrived', 'arriving'], e: '"They always …" – plural subject, simple present: "arrive".' },
+      { a: 'by', w: ['in', 'on', 'since'], e: '"By nine o’clock" means "before or at nine o’clock".' },
+      { a: 'a', w: ['an', 'many', 'few'], e: '"Kilogram" is singular and starts with a consonant sound → "a kilogram".' },
+      { a: 'which', w: ['who', 'whose', 'whom'], e: '"Which" refers to things (the bags).' },
+      { a: 'had', w: ['have', 'having', 'has'], e: 'The story is in the past ("reached home"), so "had".' },
+    ],
+  },
+  {
+    title: 'The Swimming Team',
+    text: 'Ravi wanted to join the school swimming team, (1) he was afraid of deep water. His coach told him that if he (2) every day, he would improve. (3) the first week, Ravi felt very tired. However, he did not give up. After a month, he swam (4) than before. At the competition, he won a medal and was proud of (5). His parents said they were (6) happy for him.',
+    blanks: [
+      { a: 'but', w: ['and', 'so', 'because'], e: '"But" joins two contrasting ideas (wanted to join / afraid).' },
+      { a: 'practised', w: ['practises', 'will practise', 'practise'], e: 'In reported speech with "would improve", the "if" clause uses the past: "practised".' },
+      { a: 'During', w: ['While', 'Since', 'Among'], e: '"During" is followed by a noun phrase: "During the first week".' },
+      { a: 'faster', w: ['fast', 'fastest', 'more fast'], e: 'Comparing two things ("than before") → comparative "faster".' },
+      { a: 'himself', w: ['him', 'his', 'he'], e: 'Reflexive pronoun: Ravi was proud of Ravi → "himself".' },
+      { a: 'very', w: ['much', 'too', 'more'], e: '"Very" strengthens an adjective: "very happy".' },
+    ],
+  },
+  {
+    title: 'The New Library',
+    text: 'The new library (1) been open since last month. It has (2) enormous collection of storybooks, and each shelf (3) labelled clearly. The librarian, (4) is very friendly, reads aloud to the younger children every Friday. Since the library opened, I (5) borrowed twelve books. I enjoy reading (6) the quiet corner by the window.',
+    blanks: [
+      { a: 'has', w: ['have', 'is', 'was'], e: 'Singular subject "library" + "been" → present perfect "has been".' },
+      { a: 'an', w: ['a', 'any', 'each'], e: '"Enormous" begins with a vowel sound → "an".' },
+      { a: 'is', w: ['are', 'were', 'have'], e: '"Each" takes a singular verb; the passage is in the present → "is".' },
+      { a: 'who', w: ['which', 'whose', 'whom'], e: '"Who" refers to a person (the librarian) and is the subject of "is".' },
+      { a: 'have', w: ['has', 'am', 'had'], e: '"Since …" with "I" → present perfect "have borrowed".' },
+      { a: 'in', w: ['on', 'into', 'onto'], e: '"In the corner" is the usual phrase.' },
+    ],
+  },
+];
+
+// "Spot the mistake" (Paper 2 Editing flavour): one sentence is wrong. `a` = the wrong sentence, `w` = three correct ones.
+export const EDITING = [
+  { a: 'Neither of the girls were late.', w: ['Each of the pupils has a locker.', 'My friends and I are going to the zoo.', 'The news is surprising.'], e: '"Neither" is singular → "Neither of the girls was late."' },
+  { a: 'She don’t like spicy food.', w: ['He doesn’t like spicy food.', 'They don’t like spicy food.', 'I don’t like spicy food.'], e: 'With he/she/it use "doesn’t": "She doesn’t like spicy food."' },
+  { a: 'I have seen him yesterday.', w: ['I saw him yesterday.', 'I have seen him twice.', 'I haven’t seen him today.'], e: '"Yesterday" is a finished time → simple past: "I saw him yesterday."' },
+  { a: 'He is more taller than his brother.', w: ['He is taller than his brother.', 'He is the tallest in his class.', 'He is as tall as his brother.'], e: 'Don’t use "more" with "taller": "He is taller than his brother."' },
+  { a: 'There is many people in the hall.', w: ['There are many people in the hall.', 'There is a crowd in the hall.', 'There are some chairs in the hall.'], e: '"People" is plural → "There are many people…".' },
+  { a: 'I am looking forward to meet you.', w: ['I am looking forward to meeting you.', 'I look forward to seeing you.', 'I am used to waking up early.'], e: 'After "look forward to" use the -ing form: "meeting".' },
+  { a: 'She enjoys to swim.', w: ['She enjoys swimming.', 'She likes to swim.', 'She wants to swim.'], e: '"Enjoy" is followed by -ing: "She enjoys swimming."' },
+  { a: 'The teacher gave us many homeworks.', w: ['The teacher gave us a lot of homework.', 'The teacher gave us some homework.', 'The teacher gave us two worksheets.'], e: '"Homework" is uncountable: "much homework / a lot of homework".' },
+  { a: 'Me and my brother went to the park.', w: ['My brother and I went to the park.', 'My brother and I like the park.', 'The park is near my brother and me.'], e: 'As a subject, use "I": "My brother and I went to the park."' },
+  { a: 'He suggested me to take a break.', w: ['He suggested that I take a break.', 'He advised me to take a break.', 'He suggested taking a break.'], e: '"Suggest" isn’t followed by "me to …". Say "He suggested that I take a break" or "advised me to".' },
+  { a: 'Despite of the rain, we played football.', w: ['Despite the rain, we played football.', 'In spite of the rain, we played football.', 'Although it rained, we played football.'], e: '"Despite" has no "of" (but "in spite of" does).' },
+  { a: 'I am agree with you.', w: ['I agree with you.', 'I am in agreement with you.', 'I don’t agree with you.'], e: '"Agree" is a verb – no "am": "I agree with you."' },
+];

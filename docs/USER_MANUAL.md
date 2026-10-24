@@ -68,6 +68,8 @@ Tap **Maths**, choose your level, then pick one or more topics (or none for a mi
 | **Vocabulary** | 67 PSLE-level words: choose the meaning, or choose the word that fits a sentence. Browse them all in **Word list** (🔊 hear the word). |
 | **Grammar** | 46 questions across 14 topics — subject-verb agreement, tenses, articles, prepositions, pronouns, conjunctions, word forms, comparatives, phrasal verbs, quantifiers, punctuation, passive voice, reported speech, question tags. Every answer has a reason. |
 | **Spot the Singlish** | Choose the standard-English sentence. Singlish is fine with friends — but use standard English in exams, compositions and orals! |
+| **Grammar Cloze** | A short passage with numbered blanks – choose the best word for each, just like Paper 2. |
+| **Editing** | Four sentences, one has a grammar mistake. Find it and learn the fix. |
 | **Synthesis & Transformation** | Rewrite/combine sentences. Type your answer, compare with the model, and mark yourself honestly. Other correct answers are possible. |
 | **Idioms** | Meaning and use of 22 common idioms. |
 | **Composition Lab** | Writing prompts; a **plot-twist generator** (who/where/problem/twist/lesson); a **Show, don't tell** feelings bank; and a **free checker** that looks at your word count, paragraphs, sentence length variety, repeated sentence starters, weak words (said, very, nice, went…), "telling" phrases, Singlish and missing dialogue/senses/ending. |

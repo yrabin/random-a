@@ -1,7 +1,7 @@
 import { h, clear, md, spinner, toast } from '../ui.js';
 import { store, askAI, aiReady, AIError } from '../state.js';
 import { makeRng } from '../lib/rng.js';
-import { vocabQuestions, vocabUseQuestions, grammarQuestions, grammarTopics, singlishQuestions, synthesisQuestions, idiomQuestions } from '../lib/banks.js';
+import { vocabQuestions, vocabUseQuestions, grammarQuestions, grammarTopics, singlishQuestions, synthesisQuestions, idiomQuestions, clozeQuestions, editingQuestions } from '../lib/banks.js';
 import { VOCAB, COMPOSITION_PROMPTS, ORAL_STIMULI, READ_ALOUD, SHOW_DONT_TELL } from '../data/english.js';
 import { analyze, PLOT } from '../lib/compose.js';
 import { COMPOSITION, SITUATIONAL, ORAL, WORD_COACH } from '../lib/prompts.js';
@@ -23,6 +23,8 @@ export default function english(root, { parts, query }) {
     case 'grammar': return run('Grammar quiz', () => grammarQuestions(R(), 10, query.t || null));
     case 'singlish': return run('Spot the Singlish', () => singlishQuestions(R(), 8));
     case 'synthesis': return run('Synthesis & Transformation', () => synthesisQuestions(R(), 6));
+    case 'cloze': return run('Grammar Cloze', () => clozeQuestions(R()));
+    case 'editing': return run('Spot the mistake', () => editingQuestions(R(), 8));
     case 'idioms': return run('Idioms quiz', () => idiomQuestions(R(), 8));
     case 'wordlist': return wordlist(root);
     case 'write': return write(root);
@@ -38,6 +40,8 @@ function hub(root) {
       t('📚', 'Vocabulary', 'Meanings & use in context', '#/english/vocab'),
       t('✏️', 'Grammar', '46 questions across 14 topics', '#/english/grammar'),
       t('🇸🇬', 'Spot the Singlish', 'Switch to standard English', '#/english/singlish'),
+      t('🧩', 'Grammar Cloze', 'Fill the blanks in a passage', '#/english/cloze'),
+      t('🔎', 'Editing', 'Spot the sentence with a mistake', '#/english/editing'),
       t('🔁', 'Synthesis & Transformation', 'Rewrite sentences (self-check)', '#/english/synthesis'),
       t('🎭', 'Idioms', 'Meaning & usage', '#/english/idioms'),
       t('✍️', 'Composition Lab', 'Ideas, show-don’t-tell, feedback', '#/english/write'),

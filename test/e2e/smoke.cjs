@@ -73,6 +73,11 @@ const BASE = `http://localhost:${PORT}`;
     await page.waitForSelector('.feedback');
     step('science mcq keyboard answer');
 
+    await page.goto(`${BASE}/#/english/cloze`);
+    await page.waitForSelector('.passage');
+    assert.match(await page.innerText('.passage'), /\(1\) ______/);
+    step('grammar cloze shows passage with blanks');
+
     // AI: mock provider
     await page.route('https://api.anthropic.com/**', async (route) => {
       const body = JSON.parse(route.request().postData());

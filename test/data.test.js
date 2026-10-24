@@ -34,7 +34,7 @@ test('banks build valid questions', () => {
   const r = makeRng(5);
   const all = [
     ...banks.vocabQuestions(r, 10), ...banks.vocabUseQuestions(r, 10), ...banks.grammarQuestions(r, 20), ...banks.singlishQuestions(r, 5),
-    ...banks.idiomQuestions(r, 8), ...banks.scienceQuestions(r, 20), ...banks.chineseIdiomQuestions(r, 8), ...banks.chineseVocabQuestions(r, 8),
+    ...banks.idiomQuestions(r, 8), ...banks.clozeQuestions(r), ...banks.clozeQuestions(r, 2), ...banks.editingQuestions(r, 12), ...banks.scienceQuestions(r, 20), ...banks.chineseIdiomQuestions(r, 8), ...banks.chineseVocabQuestions(r, 8),
   ];
   for (const q of all) {
     assert.equal(q.options.length, 4, q.q);

@@ -1,5 +1,5 @@
 // Turns the static content banks into quiz questions (all in the shape quiz.js expects).
-import { VOCAB, GRAMMAR, SINGLISH, SYNTHESIS, IDIOMS as EN_IDIOMS } from '../data/english.js';
+import { VOCAB, GRAMMAR, SINGLISH, SYNTHESIS, IDIOMS as EN_IDIOMS, CLOZE, EDITING } from '../data/english.js';
 import { MCQ as SCI_MCQ, OPEN as SCI_OPEN } from '../data/science.js';
 import { IDIOMS as ZH_IDIOMS, VOCAB as ZH_VOCAB } from '../data/chinese.js';
 import { makeRng } from './rng.js';
@@ -41,6 +41,17 @@ export function synthesisQuestions(rng, n) {
     id: `syn:${s.q}`, type: 'open', subject: 'english', topic: 'synthesis', topicName: 'Synthesis & Transformation',
     q: s.q, modelAnswer: s.a, keywords: [], explanation: 'Other correct answers are possible – check meaning, grammar and punctuation.',
   }));
+}
+
+/** One grammar-cloze passage becomes a run of questions that all show the same passage with numbered blanks. */
+export function clozeQuestions(rng, index = null) {
+  const c = index == null ? rng.pick(CLOZE) : CLOZE[index % CLOZE.length];
+  const passage = `${c.title}\n\n` + c.text.replace(/\((\d+)\)/g, '($1) ______');
+  return c.blanks.map((b, i) => ({ ...mc(`cloze:${c.title}:${i + 1}`, 'english', 'cloze', 'Grammar Cloze', `Blank (${i + 1}): choose the best word.`, b.a, b.w, b.e), passage }));
+}
+
+export function editingQuestions(rng, n) {
+  return rng.sample(EDITING, Math.min(n, EDITING.length)).map((x) => mc(`edit:${x.a}`, 'english', 'editing', 'Editing', 'Which sentence has a mistake?', x.a, x.w, x.e));
 }
 
 export function idiomQuestions(rng, n) {

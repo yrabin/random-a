@@ -10,7 +10,7 @@ works on a phone, tablet or laptop (and offline once loaded).
 | | Without a key (always free) | With your own AI key (optional) |
 |---|---|---|
 | ➗ **Maths** | 28 topic generators (P4–P6) with **infinite fresh questions**, step-by-step bar-model-style working, hints, 60-second Blitz, printable worksheets with answer keys | Tutor chat, **Snap & Check** (photo of handwritten working → feedback), Question Forge |
-| 📖 **English** | Vocabulary, 46 grammar Qs, *Spot the Singlish*, synthesis & transformation, idioms, **Composition Lab** (plot-twist generator, show-don't-tell bank, free writing checker), oral & read-aloud practice | PSLE-rubric **composition marking**, situational-writing marking, **oral coach**, comprehension **passage generator** |
+| 📖 **English** | Vocabulary, 46 grammar Qs, **Grammar Cloze** passages, **Editing**, *Spot the Singlish*, synthesis & transformation, idioms, **Composition Lab** (plot-twist generator, show-don't-tell bank, free writing checker), oral & read-aloud practice | PSLE-rubric **composition marking**, situational-writing marking, **oral coach**, comprehension **passage generator** |
 | 🔬 **Science** | 58 MCQs across the 5 MOE themes with explanations, open-ended CER practice, keyword cards | AI marking of open-ended answers, unlimited new questions |
 | 🀄 **Chinese** | 成语 & 词语 quizzes with pinyin and example sentences | Ask the tutor in any language |
 | 🎯 **PSLE tools** | **AL score calculator**, target planner (cheapest marks to gain), countdown, score history | Coach's note & weekly parent update |
