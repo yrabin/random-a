@@ -183,7 +183,6 @@ function oral(root) {
               j.singlish_to_standard?.length ? h('div', h('h4', '🇸🇬 Say it this way'), h('ul', j.singlish_to_standard.map((s) => h('li', `“${s.said}” → “${s.better}”`)))) : null,
               j.model_answer ? h('div', h('h4', 'Model answer'), h('p', j.model_answer), speakBtn(j.model_answer)) : null,
               j.follow_up_question ? h('p', h('b', 'The examiner might ask: '), j.follow_up_question) : null));
-            store.bump('aiUses', 0);
           } catch (e) { clear(result); result.append(h('div', { class: 'feedback no' }, e instanceof AIError ? e.message : 'Could not read the AI reply.')); }
         } }, '🤖 Get feedback'), aiReady() ? null : h('a', { href: '#/settings', class: 'small' }, 'AI key needed for feedback')),
         h('details', h('summary', 'No AI? Self-check list'), h('ul', ['Did I give my opinion AND a reason?', 'Did I give an example from my own life?', 'Did I speak in full sentences, not one word?', 'Did I avoid Singlish ("can or not", "lah")?', 'Did I speak clearly, not too fast, with expression?'].map((x) => h('li', x))))),

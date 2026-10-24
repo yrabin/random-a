@@ -1,5 +1,5 @@
 // The practice engine used by every subject: numeric answers, multiple choice and open-ended self-marking.
-import { h, clear, md, toast, beep, confetti, modal, spinner, shuffle, pct } from '../ui.js';
+import { h, clear, md, toast, beep, confetti, spinner, shuffle, pct, barModel } from '../ui.js';
 import { store, askAI, aiReady, AIError } from '../state.js';
 import { checkAnswer } from '../lib/answer.js';
 import { answerToString } from '../lib/mathgen.js';
@@ -65,6 +65,7 @@ export function startQuiz(root, opts) {
     if (extra) box.append(extra);
     if (explanation?.length) {
       box.append(h('div', { class: 'small', style: { marginTop: '6px' } }, 'How to solve it:'),
+        q.model ? h('div', { style: { margin: '6px 0' } }, barModel(q.model)) : null,
         h('ol', { class: 'steps' }, explanation.map((s) => h('li', s))));
     }
     if (rw.badges?.length) rw.badges.forEach((b) => toast(`${b.emoji} Badge unlocked: ${b.name}!`, 'good', 4500));

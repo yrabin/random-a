@@ -142,3 +142,33 @@ export const shuffle = (arr) => { const a = arr.slice(); for (let i = a.length -
 export function spinner(msg = 'Ollie is thinking…') {
   return h('div', { class: 'thinking', role: 'status' }, h('span', { class: 'otter-bob' }, '🦦'), ' ', msg);
 }
+
+/** Draw a bar model (rows of unit segments) as SVG. Built with createElementNS - no HTML parsing. */
+export function barModel(rows) {
+  const ns = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs = {}, text) => { const e = document.createElementNS(ns, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (text != null) e.textContent = text; return e; };
+  const W = 320, labelW = 78, rowH = 34, gap = 22, top = 8;
+  const maxUnits = Math.max(...rows.map((r) => r.segs.reduce((s, x) => s + x.units, 0)));
+  const scale = (W - labelW - 8) / maxUnits;
+  const svg = mk('svg', { viewBox: `0 0 ${W} ${top + rows.length * (rowH + gap)}`, role: 'img', 'aria-label': 'Bar model of the problem' });
+  svg.style.width = '100%'; svg.style.maxWidth = '420px';
+  rows.forEach((r, i) => {
+    const y = top + i * (rowH + gap);
+    svg.append(mk('text', { x: 0, y: y + rowH / 2 + 5, 'font-size': 13, 'font-weight': 800, fill: 'currentColor' }, (r.label || '').slice(0, 11)));
+    let x = labelW;
+    const total = r.segs.reduce((s, q) => s + q.units, 0);
+    r.segs.forEach((sg) => {
+      const w = sg.units * scale;
+      svg.append(mk('rect', { x, y, width: w, height: rowH, rx: 4, fill: sg.kind === 'b' ? 'var(--accent-soft)' : 'var(--brand-soft)', stroke: sg.kind === 'b' ? 'var(--accent)' : 'var(--brand)', 'stroke-width': 2, 'stroke-dasharray': sg.kind === 'b' ? '5 3' : '0' }));
+      if (sg.units > 1 && sg.units <= 12) for (let k = 1; k < sg.units; k++) svg.append(mk('line', { x1: x + k * scale, y1: y, x2: x + k * scale, y2: y + rowH, stroke: sg.kind === 'b' ? 'var(--accent)' : 'var(--brand)', 'stroke-width': 1, opacity: 0.5 }));
+      if (sg.text && w > 34) svg.append(mk('text', { x: x + w / 2, y: y + rowH / 2 + 5, 'text-anchor': 'middle', 'font-size': 11.5, 'font-weight': 800, fill: 'currentColor' }, sg.text.length > Math.floor(w / 6.4) ? sg.text.slice(0, Math.max(3, Math.floor(w / 6.4) - 1)) + '…' : sg.text));
+      x += w;
+    });
+    if (r.total) {
+      svg.append(mk('path', { d: `M${labelW} ${y + rowH + 5} v5 H${x} v-5`, fill: 'none', stroke: 'currentColor', 'stroke-width': 1.5, opacity: 0.6 }));
+      svg.append(mk('text', { x: (labelW + x) / 2, y: y + rowH + 21, 'text-anchor': 'middle', 'font-size': 12, 'font-weight': 800, fill: 'currentColor' }, r.total));
+    }
+    void total;
+  });
+  return svg;
+}

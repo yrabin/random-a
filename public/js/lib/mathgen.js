@@ -29,6 +29,9 @@ const $ = (n) => '$' + (Number.isInteger(n) ? n : n.toFixed(2));
 const fmt = (n) => (Number.isInteger(n) ? n.toLocaleString('en-US') : String(Math.round(n * 1e4) / 1e4));
 const f = (n, d) => fracStr(n, d);
 const roundTo = (x, dp) => Math.round(x * 10 ** dp) / 10 ** dp;
+// Bar-model description drawn by the UI after answering: rows of segments sized by `units`.
+const seg = (units, text = '', kind = 'a') => ({ units, text, kind });
+const bar = (label, segs, total = '') => ({ label, segs, total });
 
 function multistep(r, d) {
   const [a] = pickTwo(r);
@@ -107,6 +110,7 @@ function fracOfQty(r) {
       q: `${a} has ${total} ${thing}. ${num}/${den} of them are red. How many red ${thing} are there?`,
       answer: num * unitQty, unit: thing,
       steps: [`1 unit = ${total} ÷ ${den} = ${unitQty}`, `${plural(num, 'unit')} = ${num} × ${unitQty} = ${num * unitQty}`],
+      model: [bar(`${total} ${thing}`, [seg(num, `${num} red`, 'a'), seg(den - num, 'not red', 'b')], String(total))],
       hint: 'Divide by the denominator first, then multiply by the numerator.',
     };
   }
@@ -114,6 +118,7 @@ function fracOfQty(r) {
     q: `${a} gave away ${num}/${den} of ${a.p} ${thing} and had ${total - num * unitQty} left. How many ${thing} did he have at first?`,
     answer: total, unit: thing,
     steps: [`After giving away ${num}/${den}, he kept ${den - num}/${den}.`, `${plural(den - num, 'unit')} = ${total - num * unitQty}`, `1 unit = ${total - num * unitQty} ÷ ${den - num} = ${unitQty}`, `${den} units (the whole) = ${den} × ${unitQty} = ${total}`],
+    model: [bar('At first', [seg(num, 'gave away', 'b'), seg(den - num, `left: ${total - num * unitQty}`, 'a')], '?')],
     hint: 'Draw a bar model with the right number of equal units.',
   };
 }
@@ -224,6 +229,10 @@ function fracRemaining(r) {
       `Remainder = ${$(left)} ÷ ${d2 - 1} × ${d2} = ${$(rem)}`,
       `Money at first = ${$(rem)} ÷ ${d1 - 1} × ${d1} = ${$(M)}`,
     ],
+    model: [
+      bar('Money', [seg(1, 'book', 'b'), seg(d1 - 1, 'remainder', 'a')], '?'),
+      bar('Remainder', [seg(1, 'lunch', 'b'), seg(d2 - 1, `left ${$(left)}`, 'a')]),
+    ],
     hint: 'Work backwards: the "remainder" is the new whole for the second fraction.',
   };
 }
@@ -280,9 +289,9 @@ function ratioShare(r) {
   const [a, b] = pickTwo(r);
   const ask = r.int(0, 1);
   if (ask === 0) {
-    return { q: `${a} and ${b} shared ${$(total)} in the ratio ${x} : ${y}. How much more money did ${b} get than ${a}?`, answer: (y - x) * unit, unit: '$', dp: 0, steps: [`Total units = ${x} + ${y} = ${x + y}`, `1 unit = ${$(total)} ÷ ${x + y} = ${$(unit)}`, `Difference = ${y} − ${x} = ${plural(y - x, 'unit')}`, `${y - x} × ${$(unit)} = ${$((y - x) * unit)}`], hint: 'Draw one bar for each person; find the value of 1 unit.' };
+    return { q: `${a} and ${b} shared ${$(total)} in the ratio ${x} : ${y}. How much more money did ${b} get than ${a}?`, answer: (y - x) * unit, unit: '$', dp: 0, steps: [`Total units = ${x} + ${y} = ${x + y}`, `1 unit = ${$(total)} ÷ ${x + y} = ${$(unit)}`, `Difference = ${y} − ${x} = ${plural(y - x, 'unit')}`, `${y - x} × ${$(unit)} = ${$((y - x) * unit)}`], model: [bar(a.name, [seg(x, `${x} units`, 'a')]), bar(b.name, [seg(y, `${y} units`, 'b')])].map((r, i) => (i === 0 ? { ...r, total: `${$(total)} altogether` } : r)), hint: 'Draw one bar for each person; find the value of 1 unit.' };
   }
-  return { q: `The ratio of ${a}'s stickers to ${b}'s stickers is ${x} : ${y}. ${b} has ${y * unit} stickers. How many stickers do they have altogether?`, answer: total, unit: 'stickers', steps: [`${y} units = ${y * unit}`, `1 unit = ${y * unit} ÷ ${y} = ${unit}`, `Total = ${x + y} units = ${x + y} × ${unit} = ${total}`], hint: 'Find the value of 1 unit first.' };
+  return { q: `The ratio of ${a}'s stickers to ${b}'s stickers is ${x} : ${y}. ${b} has ${y * unit} stickers. How many stickers do they have altogether?`, answer: total, unit: 'stickers', steps: [`${y} units = ${y * unit}`, `1 unit = ${y * unit} ÷ ${y} = ${unit}`, `Total = ${x + y} units = ${x + y} × ${unit} = ${total}`], model: [bar(a.name, [seg(x, `${x} units`, 'a')]), bar(b.name, [seg(y, `${y} units = ${y * unit}`, 'b')])], hint: 'Find the value of 1 unit first.' };
 }
 
 function average(r) {
@@ -342,7 +351,7 @@ function internalTransfer(r) {
   const [a, b] = pickTwo(r);
   const give = r.int(5, 40);
   const bv = r.int(30, 90), av = bv + 2 * give;
-  return { q: `${a} has ${av} marbles and ${b} has ${bv} marbles. How many marbles must ${a} give to ${b} so that they have the same number?`, answer: give, steps: [`Difference = ${av} − ${bv} = ${2 * give}`, `Giving ${give} reduces ${a} by ${give} and increases ${b} by ${give}, closing the gap by 2 × ${give}.`, `Number to give = ${2 * give} ÷ 2 = ${give}`], hint: 'Half of the difference needs to move across.' };
+  return { q: `${a} has ${av} marbles and ${b} has ${bv} marbles. How many marbles must ${a} give to ${b} so that they have the same number?`, answer: give, steps: [`Difference = ${av} − ${bv} = ${2 * give}`, `Giving ${give} reduces ${a} by ${give} and increases ${b} by ${give}, closing the gap by 2 × ${give}.`, `Number to give = ${2 * give} ÷ 2 = ${give}`], model: [bar(a.name, [seg(bv, String(bv), 'a'), seg(2 * give, `${2 * give} more`, 'b')]), bar(b.name, [seg(bv, String(bv), 'a')])], hint: 'Half of the difference needs to move across.' };
 }
 
 function speed(r) {
