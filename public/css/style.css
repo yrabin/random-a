@@ -164,4 +164,11 @@ details { margin: 8px 0; } summary { cursor: pointer; font-weight: 800; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
+svg.pond { width: 100%; display: block; border-radius: 14px; box-shadow: var(--shadow); }
+.pond-fish { animation: swim 12s linear infinite; }
+@keyframes swim { from { transform: translateX(-20px); } to { transform: translateX(340px); } }
+.pond-ollie { animation: floaty 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes floaty { 50% { transform: translateY(-4px) rotate(-3deg); } }
+.pond-fly { animation: glow 2.4s ease-in-out infinite; }
+@keyframes glow { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
 @media (max-width: 440px) { .top-stats { gap: 4px; font-size: .78rem; } .chip { padding: 2px 7px; } .brand { font-size: 1rem; } }

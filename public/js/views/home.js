@@ -3,7 +3,7 @@ import { store, aiReady } from '../state.js';
 import { dateKey, levelFromXp, xpForLevel, levelTitle, liveStreak } from '../lib/gamify.js';
 import { daysUntil } from '../lib/alcalc.js';
 import { dueCards } from '../lib/srs.js';
-import { TOPICS } from '../lib/mathgen.js';
+import { pond } from './pond.js';
 
 const TIPS = [
   'Draw a bar model for every ratio and fraction problem – even when it looks easy.',
@@ -41,6 +41,8 @@ export default function home(root) {
       h('div', { class: 'face', 'aria-hidden': 'true' }, '🦦'),
       h('div', { class: 'bubble' }, `${greet}, ${p.name}! `, h('span', { class: 'muted' }, `Level ${lvl} · ${levelTitle(lvl)}`))),
     h('div', { style: { height: '10px' } }),
+    pond(p),
+    h('p', { class: 'muted small center', style: { margin: '4px 0 12px' } }, 'Your pond grows as you learn: lily pads = levels, fish = badges, fireflies = streak days, and the Singapore skyline appears as you level up!'),
 
     h('div', { class: 'grid' },
       h('div', { class: 'card' },
@@ -71,7 +73,6 @@ export default function home(root) {
     !aiReady()
       ? h('a', { class: 'card tile ai', href: '#/settings' }, h('b', '🤖 Unlock AI helpers (optional)'), h('small', 'Everything works without a key. Add your own AI key to get a tutor, composition marking, custom questions and more.'))
       : h('a', { class: 'card tile ai', href: '#/ai' }, h('b', '🤖 Ask Ollie (AI is on)'), h('small', 'Tutor chat, question forge, composition coach, photo marking…')));
-  void TOPICS;
 }
 
 function tile(emoji, title, sub, href, cls = '') {
