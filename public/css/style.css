@@ -151,10 +151,13 @@ details { margin: 8px 0; } summary { cursor: pointer; font-weight: 800; }
 @media (min-width: 900px) {
   :root { --tabs-h: 0px; }
   body { padding-bottom: 0; }
-  .tabs { position: sticky; top: 56px; bottom: auto; height: auto; padding: 0; justify-content: center; gap: 4px; border-top: 0; border-bottom: 1px solid var(--line); z-index: 15; }
+  body { display: flex; flex-direction: column; min-height: 100vh; }
+  .top { order: 0; } .tabs { order: 1; } main { order: 2; width: 100%; }
+  .tabs { position: sticky; top: 57px; bottom: auto; height: 46px; padding: 0; justify-content: center; gap: 4px; border-top: 0; border-bottom: 1px solid var(--line); z-index: 15; }
   .tabs a { flex: 0 0 auto; flex-direction: row; gap: 6px; padding: 10px 18px; font-size: .95rem; }
   .tabs a span { font-size: 1.1rem; }
   .toasts { top: 120px; }
+  svg.pond { max-width: 640px; margin: 0 auto; }
 }
 @media print {
   .top, .tabs, .no-print, .toasts, .skip { display: none !important; }

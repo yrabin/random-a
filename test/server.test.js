@@ -55,3 +55,10 @@ test('EXTRA_CONNECT_SRC extends the CSP', async () => {
     assert.match((await fetch(base + '/')).headers.get('content-security-policy'), /192\.168\.1\.5:11434/);
   } finally { s.close(); }
 });
+
+import fs from 'node:fs';
+import { buildManifest } from '../scripts/gen-asset-manifest.mjs';
+test('asset-manifest.json is up to date (run `npm run manifest` if this fails)', () => {
+  const current = fs.readFileSync(new URL('../public/asset-manifest.json', import.meta.url), 'utf8');
+  assert.equal(current, buildManifest());
+});

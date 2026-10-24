@@ -46,6 +46,8 @@ npm i -D playwright && npx playwright install chromium && node test/e2e/smoke.cj
 
 ## Adding content
 
+> After adding or removing any file under `public/`, run `npm run manifest` — it refreshes `public/asset-manifest.json`, which the service worker uses to pre-cache the whole app for offline use. A unit test fails if it is stale.
+
 * **Multiple-choice** (grammar/science): add an object with the correct option in `a` and three wrong options in `w`; the tests enforce 3 distinct wrong options and an explanation. Options are shuffled at run time.
 * **Vocabulary / idioms / 成语**: add tuples to the arrays in `js/data/*.js`.
 * **A Maths topic**: write `function myTopic(r, d)` in `mathgen.js` returning `{ q, answer, steps[], hint, unit?, dp? }` (`answer` may be a number, `{frac:[n,d]}` or `{linear:{coef,const}}`) and add it to `TOPICS` with its P-level. `npm test` will run it against hundreds of seeds (finite answers, no `NaN`, model answer accepted by the checker). Add a brute-force verification test for anything non-trivial, as done for ratio/assumption/remainder.

@@ -5,9 +5,12 @@
   "type": "module",
   "private": true,
   "license": "MIT",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server.js",
-    "test": "node --test \"test/*.test.js\""
+    "test": "node --test \"test/*.test.js\"",
+    "manifest": "node scripts/gen-asset-manifest.mjs"
   }
 }
